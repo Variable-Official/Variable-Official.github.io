@@ -3,52 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Site Name</title>
+  <title>Your Brand</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet" />
 </head>
-<body>
 
-  <header>
-    <nav class="navbar">
-      <div class="logo">YourLogo</div>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <a class="cta" href="#contact">Get Started</a>
+<body>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="nav-logo">YourBrand</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#showcase">Showcase</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-content">
-      <h1>Welcome to <span>Your Brand</span></h1>
-      <p>Delivering clean, smooth web experiences.</p>
-      <a class="btn" href="#features">Learn More</a>
+    <div class="hero-content fade-up">
+      <h1>Made to Impress.</h1>
+      <p>A beautifully minimal experience designed with precision and clarity.</p>
+      <a class="hero-btn" href="#features">Explore</a>
     </div>
   </section>
 
+  <!-- Feature Blocks -->
   <section id="features" class="features">
-    <h2>What We Offer</h2>
-    <div class="feature-cards">
-      <div class="card">
-        <h3>Fast & Lightweight</h3>
-        <p>Optimised for speed and performance.</p>
+    <h2 class="section-title fade-up">Experience the Difference</h2>
+
+    <div class="feature-grid">
+      <div class="feature-card fade-up">
+        <h3>Premium Design</h3>
+        <p>Every detail crafted with simplicity and elegance in mind.</p>
       </div>
-      <div class="card">
-        <h3>Responsive</h3>
-        <p>Looks great on mobile and desktop.</p>
+
+      <div class="feature-card fade-up">
+        <h3>Seamless Performance</h3>
+        <p>Clean code and optimized layouts for smooth interactions.</p>
       </div>
-      <div class="card">
-        <h3>Easy to Customize</h3>
-        <p>Simple code structure — edit as you like.</p>
+
+      <div class="feature-card fade-up">
+        <h3>Fully Responsive</h3>
+        <p>Looks flawless on every device — from mobile to desktop.</p>
       </div>
     </div>
   </section>
 
-  <footer id="contact">
-    <p>&copy; 2025 Your Brand. All rights reserved.</p>
+  <!-- Showcase -->
+  <section id="showcase" class="showcase">
+    <div class="glass-card fade-up">
+      <h2>Designed to Stand Out</h2>
+      <p>Minimal components, pure focus, effortless user flow.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <p>© 2025 YourBrand. All Rights Reserved.</p>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
