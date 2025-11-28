@@ -3,152 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iOS-Style Website</title>
+  <title>iOS 26 UI Website</title>
 
-  <!-- iOS Style Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
       --bg: #f2f2f7;
-      --card: rgba(255,255,255,0.75);
+      --card: rgba(255,255,255,0.72);
       --text: #1c1c1e;
       --blue: #0a84ff;
-      --border: rgba(0,0,0,0.1);
-    }
+      --border: rgba(0,0,0,0.08);
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+      /* Dark mode */
+      --bg-dark: #000000;
+      --card-dark: rgba(28,28,30,0.72);
+      --text-dark: #f5f5f7;
+      --border-dark: rgba(255,255,255,0.09);
+    }
 
     body {
-      font-family: "SF Pro Text", sans-serif;
+      margin: 0;
+      font-family: "SF Pro Display", sans-serif;
       background: var(--bg);
       color: var(--text);
-      -webkit-font-smoothing: antialiased;
+      transition: .4s ease;
     }
 
-    /* iOS Smooth Fade */
-    .fade { opacity: 0; animation: fadeIn .8s ease forwards; }
-    @keyframes fadeIn { to { opacity: 1; } }
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
 
-    /* iOS-like Header */
-    header {
-      padding: 5rem 2rem 4rem;
-      text-align: center;
+    /* --- Dynamic Island --- */
+    .dynamic-island {
+      width: 220px;
+      height: 38px;
+      background: black;
+      border-radius: 50px;
+      margin: 1.5rem auto;
+      position: fixed;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: .9rem;
+      opacity: 0.95;
+    }
+
+    /* --- Control Center Hero --- */
+    .hero {
+      margin-top: 90px;
+      padding: 4rem 1.5rem;
+      background: linear-gradient(160deg, #ffffffaa, #dfe2eeaa);
       backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      background: linear-gradient(180deg, #ffffffee, #f2f2f7dd);
-      border-bottom: 1px solid var(--border);
-    }
-    header h1 {
-      font-weight: 700;
-      font-size: 2.9rem;
-      letter-spacing: -0.02rem;
-    }
-    header p {
-      margin-top: .7rem;
-      font-size: 1.15rem;
-      opacity: .7;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
 
-    /* iOS Navigation */
+    .hero h1 { font-size: 3rem; font-weight: 700; }
+    .hero p { margin-top: .8rem; opacity: 0.7; font-size: 1.2rem; }
+
+    body.dark .hero { background: rgba(40,40,40,0.55); }
+
+    /* --- Navigation --- */
     nav {
       display: flex;
       justify-content: center;
-      gap: 1.7rem;
-      padding: 1.2rem;
+      gap: 1.5rem;
+      padding: 1rem;
+      background: rgba(245,245,245,0.55);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
+      z-index: 50;
     }
+
+    body.dark nav {
+      background: rgba(15,15,15,0.6);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
     nav a {
-      font-size: 1rem;
       text-decoration: none;
-      color: var(--text);
-      padding: .45rem 1rem;
+      color: inherit;
+      font-weight: 600;
+      padding: .5rem 1rem;
       border-radius: 1rem;
       transition: .25s;
     }
+
     nav a:hover {
       background: var(--blue);
       color: white;
     }
 
-    /* Main Content */
-    main { max-width: 900px; margin: 3rem auto; padding: 0 1.5rem; }
+    /* --- Widget Cards --- */
+    main {
+      max-width: 1050px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      gap: 2rem;
+    }
 
-    /* iOS Card */
-    section {
+    .widget {
       background: var(--card);
-      padding: 2.2rem;
+      padding: 2rem;
       border-radius: 1.8rem;
-      margin-bottom: 2rem;
       backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border: 1px solid rgba(255,255,255,0.6);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
       transition: .3s;
     }
-    section:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+
+    .widget:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.18);
     }
 
-    h2 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: .8rem;
-      letter-spacing: -0.015rem;
+    body.dark .widget {
+      background: var(--card-dark);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    p { font-size: 1.05rem; opacity: .85; line-height: 1.65; }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 1rem;
-      font-size: .95rem;
-      color: #8a8a8d;
+    /* --- iOS Toggles --- */
+    .toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
     }
+
+    .switch {
+      width: 52px;
+      height: 30px;
+      background: #ccc;
+      border-radius: 30px;
+      position: relative;
+      transition: .3s;
+      cursor: pointer;
+    }
+
+    .switch::after {
+      content: "";
+      width: 26px;
+      height: 26px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: .3s;
+    }
+
+    .switch.active {
+      background: var(--blue);
+    }
+
+    .switch.active::after {
+      transform: translateX(22px);
+    }
+
+    /* --- Buttons */
+    .ios-btn {
+      display: inline-block;
+      padding: .7rem 1.4rem;
+      border-radius: 1rem;
+      background: var(--blue);
+      color: white;
+      font-weight: 600;
+      letter-spacing: .3px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      transition: .25s;
+    }
+
+    .ios-btn:hover { opacity: .85; }
+
+    footer { text-align: center; padding: 3rem 1rem; opacity: .6; }
   </style>
 </head>
 
 <body>
-  <header class="fade">
-    <h1>iOS-Inspired Website</h1>
-    <p>Clean • Rounded • Glassy • iOS 16+ Style</p>
+  <div class="dynamic-island">iOS 26 UI</div>
+
+  <header class="hero">
+    <h1>iOS 26 Inspired Site</h1>
+    <p>Control Center • Dynamic Island • Widgets • Toggles • Dark Mode</p>
   </header>
 
-  <nav class="fade" style="animation-delay:.2s">
+  <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
 
   <main>
-    <section id="home" class="fade" style="animation-delay:.4s">
+    <section class="widget" id="home">
       <h2>Home</h2>
-      <p>This layout mimics the smooth, rounded, glassy feel of modern iOS UI. Minimal, airy, and soft — just like iOS 16–17+ design language.</p>
+      <p>A full iOS 26 UI experience with widgets, toggles, blur effects, and more.</p>
+
+      <div class="toggle">
+        <span>Enable Feature</span>
+        <div class="switch" onclick="this.classList.toggle('active')"></div>
+      </div>
+
+      <button class="ios-btn" style="margin-top:1.3rem;">iOS Button</button>
     </section>
 
-    <section id="about" class="fade" style="animation-delay:.6s">
+    <section class="widget" id="about">
       <h2>About</h2>
-      <p>This is your space to introduce yourself or your project. The iOS card style keeps everything elegant and distraction-free.</p>
+      <p>This site mimics the next-gen iOS UI — soft edges, gradients, frosted glass, and deep shadows.</p>
     </section>
 
-    <section id="contact" class="fade" style="animation-delay:.8s">
+    <section class="widget" id="contact">
       <h2>Contact</h2>
-      <p>Add links, socials, or anything else. Every card retains the signature Apple-style translucency and shadow depth.</p>
+      <p>Add your socials or contact info. Everything follows Apple UI style guidelines.</p>
+
+      <div class="toggle">
+        <span>Dark Mode</span>
+        <div class="switch" id="darkToggle"></div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    © 2025 iOS-Style Website. Designed with Apple-like elegance.
-  </footer>
+  <footer>© 2025 iOS 26 UI Experience</footer>
+
+  <script>
+    // Dark mode toggle
+    const darkToggle = document.getElementById("darkToggle");
+    darkToggle.addEventListener("click", () => {
+      darkToggle.classList.toggle("active");
+      document.body.classList.toggle("dark");
+    });
+  </script>
 </body>
 </html>
