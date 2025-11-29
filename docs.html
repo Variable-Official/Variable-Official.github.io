@@ -4,134 +4,178 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Variable Docs</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
+    /* THEME VARIABLES */
     :root {
-      --bg: #f5f6fa;
-      --text: #111;
-      --card-bg: #ffffff;
-      --shadow: rgba(0,0,0,0.08);
+      --bg: #f7f8fc;
+      --text: #121212;
+      --card: #ffffff;
+      --accent: #6366f1;
+      --accent2: #0a84ff;
+      --sidebar-bg: #ffffff;
+      --border: #e4e6ef;
+      --shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
 
     .dark {
       --bg: #0d1117;
       --text: #e6e6e6;
-      --card-bg: #161b22;
-      --shadow: rgba(255,255,255,0.06);
+      --card: #161b22;
+      --sidebar-bg: #161b22;
+      --border: #2b2f36;
+      --shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
-
     body {
       font-family:'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height:1.75;
-      transition: background .25s, color .25s;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.8;
+      transition:background .3s, color .3s;
     }
 
+    /* HERO */
     header.hero {
-      background:linear-gradient(135deg, #6366f1, #0a84ff);
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
       color:white;
       text-align:center;
-      padding:120px 20px 90px;
+      padding:140px 20px 110px;
+      border-bottom-left-radius:50px;
+      border-bottom-right-radius:50px;
+      box-shadow:var(--shadow);
     }
     header.hero h1 {
-      font-size:3.2rem;
-      margin-bottom:14px;
+      font-size:3.4rem;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    header.hero p {
+      font-size:1.18rem;
+      max-width:750px;
+      margin:auto;
+      opacity:.95;
     }
 
+    /* NAV */
     nav {
+      margin-top:-40px;
       text-align:center;
-      margin:30px 0;
     }
-    nav a, #dark-toggle {
-      margin:0 15px;
-      text-decoration:none;
-      color:var(--text);
+    #dark-toggle {
+      background:var(--card);
+      padding:12px 26px;
+      border-radius:50px;
+      border:1px solid var(--border);
+      cursor:pointer;
       font-weight:600;
       transition:.2s;
-      cursor:pointer;
-      background:none;
-      border:none;
-      font-size:1rem;
+      box-shadow:var(--shadow);
     }
-    nav a:hover, #dark-toggle:hover {
-      color:#0a84ff;
+    #dark-toggle:hover {
+      transform:translateY(-2px);
+      background:var(--accent);
+      color:white;
+      border-color:transparent;
     }
 
+    /* LAYOUT */
     .container {
       display:flex;
-      max-width:1300px;
+      max-width:1400px;
       margin:70px auto;
-      padding:0 30px;
-      gap:50px;
+      padding:0 40px;
+      gap:60px;
     }
 
+    /* SIDEBAR */
     .sidebar {
-      width:260px;
-      background:var(--card-bg);
-      padding:35px;
-      border-radius:16px;
-      box-shadow:0 8px 24px var(--shadow);
-      height:max-content;
+      width:300px;
+      background:var(--sidebar-bg);
+      padding:35px 28px;
+      border-radius:20px;
       position:sticky;
-      top:20px;
-      transition:background .25s;
+      top:40px;
+      height:max-content;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .sidebar h3 {
+      font-size:1.4rem;
+      margin-bottom:18px;
     }
 
     .sidebar a {
       display:block;
-      margin:12px 0;
-      color:var(--text);
+      padding:12px 16px;
+      margin-bottom:8px;
+      border-radius:12px;
       text-decoration:none;
       font-size:1.05rem;
-    }
-    .sidebar a:hover {
-      color:#0a84ff;
+      color:var(--text);
+      border:1px solid transparent;
+      transition:.25s;
     }
 
+    .sidebar a:hover {
+      background:var(--accent);
+      color:white;
+    }
+
+    /* CONTENT */
     .content {
       flex:1;
-      background:var(--card-bg);
-      padding:50px;
-      border-radius:20px;
-      box-shadow:0 8px 24px var(--shadow);
-      transition:background .25s;
+      background:var(--card);
+      padding:60px;
+      border-radius:28px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
     }
 
     .content section {
-      margin-bottom:70px;
+      margin-bottom:80px;
     }
 
     .content h2 {
-      margin-bottom:12px;
-      font-size:2.2rem;
+      font-size:2.4rem;
+      margin-bottom:14px;
+      font-weight:700;
+      color:var(--text);
     }
 
     .content p {
-      margin-bottom:22px;
-      font-size:1.05rem;
-      opacity:.92;
+      margin-bottom:20px;
+      font-size:1.12rem;
+      opacity:.9;
     }
 
     .content code {
-      background:#dcdcdc22;
-      padding:6px 10px;
-      border-radius:6px;
+      display:block;
+      width:100%;
+      background:#1f1f1f10;
+      padding:14px 18px;
+      border-radius:12px;
+      margin-bottom:14px;
+      font-size:1rem;
+      border-left:5px solid var(--accent);
     }
 
     footer {
       text-align:center;
-      padding:50px 20px;
+      padding:60px 20px;
       font-size:.95rem;
-      margin-top:70px;
-      opacity:.7;
+      margin-top:100px;
+      opacity:.8;
     }
 
-    @media(max-width:900px){
+    @media(max-width:900px) {
       .container { flex-direction:column; }
       .sidebar { width:100%; position:static; }
+      .content { padding:40px; }
     }
   </style>
 </head>
@@ -139,38 +183,42 @@
 
 <header class="hero">
   <h1>Variable Docs</h1>
-  <p>Your official documentation for Discord bots & Roblox systems.</p>
+  <p>Professional documentation for COSMO and future Variable software.</p>
 </header>
 
 <nav>
-  <button id="dark-toggle">Dark Mode</button>
+  <button id="dark-toggle">🌙 Toggle Theme</button>
 </nav>
 
 <div class="container">
 
   <aside class="sidebar">
-    <h3>Contents</h3>
+    <h3>Documentation</h3>
     <a href="#COSMOInfo">COSMO Information</a>
-    <a href="#COSMOIntro">COSMO Intro</a>
+    <a href="#COSMOIntro">COSMO Setup Guide</a>
   </aside>
 
   <main class="content">
 
     <section id="COSMOInfo">
       <h2>COSMO</h2>
-      <p>COSMO is a moderation bot with easy configuration along with swift command execution.</p>
+      <p>
+        COSMO is a high-performance moderation bot featuring smooth execution,  
+        intuitive configuration, fast syncing, and a clean command system.
+      </p>
     </section>
 
     <section id="COSMOIntro">
-      <h2>COSMO</h2>
-      <p>CFollow these steps:</p>
-      <code>1. Purchase the licence for COSMO.</code>
-      
-      <code>2. Make a ticket in the support channel with proof of purchase.</code>
-      
-      <code>3. After your purchase was been verified you will receive a link to add the bot.</code>
-      
+      <h2>COSMO Setup Guide</h2>
+      <p>Follow these steps to get COSMO set up in your server:</p>
+
+      <code>1. Purchase a COSMO license from the official Variable store.</code>
+      <code>2. Open a support ticket and provide proof of purchase.</code>
+      <code>3. Once verified, you will receive a private invite link for COSMO.</code>
     </section>
+
+  </main>
+</div>
 
 <footer>© 2025 Variable. All rights reserved.</footer>
 
