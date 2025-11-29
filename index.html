@@ -3,190 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Variable</title>
-  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+  <title>Variable — Product Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: rgba(255,255,255,0.65);
-      --fg: #111;
-      --card-bg: rgba(255,255,255,0.55);
-      --accent: #007aff;
-      --blur: blur(22px);
-      --radius: 28px;
-      --shadow: 0 10px 40px rgba(0,0,0,0.18);
-    }
-    [data-theme="dark"] {
-      --bg: rgba(20,20,20,0.55);
-      --fg: #f5f5f5;
-      --card-bg: rgba(35,35,35,0.55);
-      --accent: #0a84ff;
-      --shadow: 0 10px 40px rgba(0,0,0,0.55);
-    }
-
+    * { margin:0; padding:0; box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: 'SF Pro Display', sans-serif;
-      background: linear-gradient(145deg, #d3d7e5, #f3f4f8);
-      color: var(--fg);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
-      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f6fa;
+      color: #1a1a1a;
+      line-height: 1.6;
     }
-
-    .dynamic-island {
-      width: 250px;
-      height: 38px;
-      background: var(--card-bg);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
-      border-radius: 40px;
-      margin: 25px auto;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 500;
-      transition: 0.25s;
-    }
-    .dynamic-island:hover {
-      width: 330px;
-      height: 60px;
-    }
-
-    .hero {
-      width: 90%;
-      margin: auto;
-      margin-top: 35px;
-      padding: 40px;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-    .hero h1 {
-      margin: 0;
-      font-size: 42px;
-      font-weight: 700;
-    }
-
-    .widgets {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
-      width: 90%;
-      margin: 40px auto;
-    }
-    .widget {
-      padding: 22px;
-      height: 160px;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      font-size: 18px;
-      font-weight: 500;
-    }
-
-    .toggle {
-      width: 52px;
-      height: 30px;
-      background: #ccc;
-      border-radius: 30px;
-      position: relative;
-      cursor: pointer;
-      transition: 0.25s;
-    }
-    .toggle::after {
-      content: "";
-      width: 26px;
-      height: 26px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 2px; left: 2px;
-      transition: 0.25s;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    }
-    .toggle.active {
-      background: var(--accent);
-    }
-    .toggle.active::after {
-      left: 24px;
-    }
-
-    .theme-btn {
-      padding: 14px 24px;
-      background: var(--accent);
+    header.hero {
+      background: linear-gradient(135deg, #6366f1, #0a84ff);
       color: white;
-      border-radius: 20px;
-      border: none;
-      font-size: 17px;
-      margin-top: 20px;
-      cursor: pointer;
-      box-shadow: var(--shadow);
+      text-align: center;
+      padding: 120px 20px 80px;
+    }
+    header.hero h1 {
+      font-size: 3.6rem;
+      margin-bottom: 20px;
+    }
+    header.hero p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: auto;
+      opacity: 0.9;
+    }
+    nav {
+      text-align: center;
+      margin: 20px 0;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color .2s;
+    }
+    nav a:hover {
+      color: #0a84ff;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.12);
+    }
+    .card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: #111;
+    }
+    .card p {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    @media (max-width: 600px) {
+      header.hero h1 { font-size: 2.8rem; }
+      .features { gap: 18px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="dynamic-island">Variable — Product Hub</div>
+  <header class="hero">
+    <h1>Welcome to Variable</h1>
+    <p>Founded by FJFG11 in 2025 — Variable is your all-in-one hub for Discord bots, Roblox systems, utilities, automation, analytics and much more.</p>
+  </header>
 
-  <div class="hero">
-    <h1>Variable</h1>
-    <p style="margin-top:10px;font-size:18px;opacity:0.8;">Founded by FJFG11 in 2025, Variable provides next-generation Discord bots, Roblox systems, automation tools, analytics, moderation utilities, and custom integrations.</p>
-    <p style="margin-top:14px;font-size:17px;opacity:0.8;">Our mission is simple: Deliver high-quality, powerful, seamless systems to every community.</p>
+  <nav>
+    <a href="#bots">Discord Bots</a>
+    <a href="#roblox">Roblox Systems</a>
+    <a href="#tools">Tools & Automation</a>
+    <a href="#analytics">Analytics</a>
+    <a href="docs.html">Docs</a>
+  </nav>
 
-    <button class="theme-btn" onclick="toggleTheme()">Toggle Dark Mode</button>
-    <a href="docs.html" style="display:inline-block;margin-top:16px;text-decoration:none;color:var(--accent);font-size:18px;font-weight:600;">Documentation →</a>
-  </div>
-
-  <div class="widgets" style="margin-top:50px;">
-    <div class="widget">
-      <div style="font-size:22px;font-weight:700;">Discord Bots</div>
-      <div style="opacity:0.75;">Moderation • Fun • Utility • AI • Logging</div>
+  <section class="features">
+    <div class="card" id="bots">
+      <h3>Discord Bots</h3>
+      <p>Premium moderation, fun, utility and AI-powered bots to elevate any server.</p>
     </div>
-
-    <div class="widget">
-      <div style="font-size:22px;font-weight:700;">Roblox Systems</div>
-      <div style="opacity:0.75;">Admin panels • Game utilities • Automation APIs</div>
+    <div class="card" id="roblox">
+      <h3>Roblox Systems</h3>
+      <p>Game admin panels, automation APIs, and full-featured Roblox utilities.</p>
     </div>
-
-    <div class="widget">
-      <div style="font-size:22px;font-weight:700;">Automation Tools</div>
-      <div style="opacity:0.75;">Status pings • Auto-sync • Auto-moderation</div>
+    <div class="card" id="tools">
+      <h3>Automation Tools</h3>
+      <p>Auto-syncs, scheduled actions, auto-moderation — built to save time and effort.</p>
     </div>
-
-    <div class="widget">
-      <div style="font-size:22px;font-weight:700;">Analytics</div>
-      <div style="opacity:0.75;">Usage metrics • Server insights • Activity charts</div>
+    <div class="card" id="analytics">
+      <h3>Analytics & Metrics</h3>
+      <p>Usage statistics, server insights and activity charts so you can track performance.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="hero" style="margin-top:60px;">
-    <h1 style="font-size:34px;">Why Choose Variable?</h1>
-    <ul style="text-align:left;max-width:700px;margin:20px auto;font-size:18px;opacity:0.85;line-height:1.6;">
-      <li><strong>High reliability</strong> — systems built for stability & uptime.</li>
-      <li><strong>Fast updates</strong> — constantly evolving features & patches.</li>
-      <li><strong>Modern design</strong> — clean iOS-style interfaces for web & apps.</li>
-      <li><strong>Community-driven</strong> — features built based on your feedback.</li>
-      <li><strong>Cross-platform</strong> — Discord, Roblox, API tools, and more.</li>
-    </ul>
-  </div>
-
-<script>
-  function toggleTheme(){
-    const body = document.body;
-    const dark = body.getAttribute('data-theme') === 'dark';
-    body.setAttribute('data-theme', dark ? 'light' : 'dark');
-  }
-</script>
+  <footer>© 2025 Variable. All rights reserved.</footer>
 
 </body>
 </html>
