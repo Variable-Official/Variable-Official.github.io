@@ -22,11 +22,9 @@ body{
     overflow-x:hidden;
 }
 
-html{
-    scroll-behavior:smooth;
-}
+html{ scroll-behavior:smooth; }
 
-/* PARTICLES */
+/* ===== PARTICLES ===== */
 #particles{
     position:fixed;
     width:100%;
@@ -36,30 +34,26 @@ html{
     z-index:-2;
 }
 
-/* Glow background */
+/* ===== GLOW BACKGROUND ===== */
 body::before, body::after{
     content:"";
     position:fixed;
     width:600px;
     height:600px;
-    filter:blur(120px);
-    opacity:0.6;
+    filter:blur(140px);
+    opacity:0.5;
     z-index:-1;
 }
-
 body::before{
-    background:radial-gradient(circle,#5f00ff 0%, transparent 70%);
-    top:-200px;
-    right:-200px;
+    background:radial-gradient(circle,#6a00ff 0%, transparent 70%);
+    top:-200px; right:-200px;
 }
-
 body::after{
     background:radial-gradient(circle,#00eaff 0%, transparent 70%);
-    bottom:-200px;
-    left:-200px;
+    bottom:-200px; left:-200px;
 }
 
-/* Navbar */
+/* ===== NAVBAR ===== */
 nav{
     position:fixed;
     width:100%;
@@ -67,14 +61,20 @@ nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    backdrop-filter:blur(14px);
-    background:rgba(10,10,10,0.4);
-    border-bottom:1px solid rgba(255,255,255,0.05);
+    transition:0.4s ease;
     z-index:1000;
+}
+
+nav.scrolled{
+    padding:15px 80px;
+    backdrop-filter:blur(18px);
+    background:rgba(10,10,10,0.6);
+    border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
 nav h1{
     font-weight:900;
+    letter-spacing:1px;
 }
 
 nav ul{
@@ -89,11 +89,9 @@ nav a{
     transition:0.3s;
 }
 
-nav a:hover{
-    color:white;
-}
+nav a:hover{ color:white; }
 
-/* Hero */
+/* ===== HERO ===== */
 .hero{
     height:100vh;
     display:flex;
@@ -105,9 +103,19 @@ nav a:hover{
 }
 
 .hero h2{
-    font-size:72px;
+    font-size:76px;
     font-weight:900;
-    line-height:1.1;
+    line-height:1.05;
+    background:linear-gradient(90deg,#fff,#aaa,#fff);
+    background-size:200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:gradientShift 6s infinite linear;
+}
+
+@keyframes gradientShift{
+    0%{background-position:0%;}
+    100%{background-position:200%;}
 }
 
 .hero p{
@@ -118,14 +126,14 @@ nav a:hover{
 }
 
 .hero-buttons{
-    margin-top:40px;
+    margin-top:45px;
     display:flex;
     gap:20px;
     flex-wrap:wrap;
     justify-content:center;
 }
 
-/* Buttons */
+/* ===== BUTTONS ===== */
 .btn{
     padding:16px 36px;
     border-radius:50px;
@@ -135,6 +143,8 @@ nav a:hover{
     align-items:center;
     gap:10px;
     transition:0.3s;
+    position:relative;
+    overflow:hidden;
 }
 
 .primary-btn{
@@ -143,8 +153,8 @@ nav a:hover{
 }
 
 .primary-btn:hover{
-    background:#e6e6e6;
     transform:translateY(-4px);
+    box-shadow:0 0 25px rgba(255,255,255,0.4);
 }
 
 .secondary-btn{
@@ -156,26 +166,27 @@ nav a:hover{
 .secondary-btn:hover{
     background:rgba(255,255,255,0.15);
     transform:translateY(-4px);
+    box-shadow:0 0 25px rgba(255,255,255,0.1);
 }
 
-/* Sections */
+/* ===== SECTIONS ===== */
 .section{
-    padding:140px 80px;
+    padding:160px 80px;
     text-align:center;
 }
 
 .section h3{
-    font-size:42px;
+    font-size:46px;
     margin-bottom:20px;
 }
 
 .section p{
     color:#777;
     max-width:600px;
-    margin:0 auto 50px auto;
+    margin:0 auto 60px auto;
 }
 
-/* Cards */
+/* ===== CARDS ===== */
 .cards{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -192,27 +203,34 @@ nav a:hover{
 }
 
 .card:hover{
-    transform:translateY(-12px);
+    transform:translateY(-15px) scale(1.02);
     background:rgba(255,255,255,0.08);
 }
 
-/* Scroll reveal */
+/* ===== SCROLL REVEAL ===== */
 .reveal{
     opacity:0;
     transform:translateY(60px);
     transition:1s ease;
 }
-
 .reveal.active{
     opacity:1;
     transform:translateY(0);
 }
 
 footer{
-    padding:60px;
+    padding:80px;
     text-align:center;
     color:#555;
     border-top:1px solid rgba(255,255,255,0.05);
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+    nav{ padding:20px; }
+    nav.scrolled{ padding:15px; }
+    .section{ padding:120px 30px; }
+    .hero h2{ font-size:48px; }
 }
 </style>
 </head>
@@ -220,7 +238,7 @@ footer{
 
 <canvas id="particles"></canvas>
 
-<nav>
+<nav id="navbar">
     <h1>Variable Studios</h1>
     <ul>
         <li><a href="#about">About</a></li>
@@ -237,8 +255,8 @@ footer{
         <a href="https://discord.gg/2SmMSSkmmv" target="_blank" class="btn primary-btn">
             <i class="fa-brands fa-discord"></i> Join Discord
         </a>
-        <a href="https://www.roblox.com/groups/YOURGROUPID" target="_blank" class="btn secondary-btn">
-            <i class="fa-solid fa-gamepad"></i> Roblox Group
+        <a href="https://www.roblox.com/communities/753140944/Variable-Official#!/about" target="_blank" class="btn secondary-btn">
+            <i class="fa-solid fa-people-group"></i> Roblox
         </a>
     </div>
 </section>
@@ -251,30 +269,17 @@ footer{
 <section class="section reveal" id="Info">
     <h3>Information</h3>
     <div class="cards">
-        <div class="card reveal">
-            <h4>Easy Setup</h4>
-            <p>Drag and drop the system directly into your game.</p>
-        </div>
-        <div class="card reveal">
-            <h4>Smart Whitelisting</h4>
-            <p>Whitelist via UserIDs and Roblox group ranks.</p>
-        </div>
-        <div class="card reveal">
-            <h4>STARR Plus+</h4>
-            <p>Unlock advanced features for R$ 250.</p>
-        </div>
+        <div class="card reveal"><h4>Easy Setup</h4><p>Drag and drop the system directly into your game.</p></div>
+        <div class="card reveal"><h4>Smart Whitelisting</h4><p>Whitelist via UserIDs and group ranks.</p></div>
+        <div class="card reveal"><h4>STARR Plus+</h4><p>Unlock advanced features for R$ 250.</p></div>
     </div>
 </section>
 
 <section class="section reveal" id="contact">
     <h3>Connect With Us</h3>
-
     <div class="hero-buttons">
         <a href="https://discord.gg/2SmMSSkmmv" target="_blank" class="btn primary-btn">
             <i class="fa-brands fa-discord"></i> Discord
-        </a>
-        <a href="https://www.roblox.com/communities/753140944/Variable-Official#!/about" target="_blank" class="btn secondary-btn">
-            <i class="fa-solid fa-people-group"></i> Roblox
         </a>
         <a href="https://vaultroblox.com/9b83924d-1cd1-413a-8832-ec0a52fa76f0/f6562309-26d8-4d20-bada-b63b60ee55f8" target="_blank" class="btn secondary-btn">
             <i class="fa-solid fa-cart-shopping"></i> Buy STARR
@@ -287,6 +292,11 @@ footer{
 </footer>
 
 <script>
+/* Navbar shrink */
+window.addEventListener("scroll",()=>{
+    document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>50);
+});
+
 /* Scroll reveal */
 function revealOnScroll(){
     document.querySelectorAll('.reveal').forEach(el=>{
@@ -298,48 +308,63 @@ function revealOnScroll(){
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
 
-/* Particles */
+/* Particles with mouse interaction */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particlesArray = [];
+let mouse = {x:null,y:null};
+window.addEventListener("mousemove",e=>{
+    mouse.x=e.x; mouse.y=e.y;
+});
+
 class Particle{
     constructor(){
-        this.x = Math.random()*canvas.width;
-        this.y = Math.random()*canvas.height;
-        this.size = Math.random()*2;
-        this.speedX = (Math.random()-0.5)*0.5;
-        this.speedY = (Math.random()-0.5)*0.5;
+        this.x=Math.random()*canvas.width;
+        this.y=Math.random()*canvas.height;
+        this.size=Math.random()*2;
+        this.speedX=(Math.random()-0.5)*0.6;
+        this.speedY=(Math.random()-0.5)*0.6;
     }
     update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if(this.x > canvas.width || this.x < 0) this.speedX *= -1;
-        if(this.y > canvas.height || this.y < 0) this.speedY *= -1;
+        this.x+=this.speedX;
+        this.y+=this.speedY;
+
+        if(mouse.x){
+            let dx=this.x-mouse.x;
+            let dy=this.y-mouse.y;
+            let distance=Math.sqrt(dx*dx+dy*dy);
+            if(distance<120){
+                this.x+=dx/20;
+                this.y+=dy/20;
+            }
+        }
+
+        if(this.x>canvas.width||this.x<0) this.speedX*=-1;
+        if(this.y>canvas.height||this.y<0) this.speedY*=-1;
     }
     draw(){
-        ctx.fillStyle = "rgba(255,255,255,0.5)";
+        ctx.fillStyle="rgba(255,255,255,0.5)";
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
         ctx.fill();
     }
 }
-function init(){
-    for(let i=0;i<120;i++) particlesArray.push(new Particle());
-}
+
+let particles=[];
+for(let i=0;i<140;i++) particles.push(new Particle());
+
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    particlesArray.forEach(p=>{p.update();p.draw();});
+    particles.forEach(p=>{p.update();p.draw();});
     requestAnimationFrame(animate);
 }
-init();
 animate();
 
 window.addEventListener("resize",()=>{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
 });
 </script>
 
