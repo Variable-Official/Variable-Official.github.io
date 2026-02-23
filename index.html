@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Studio</title>
 
-<!-- Apple-like font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 :root{
   --bg-light:#f5f5f7;
   --bg-dark:#0f0f12;
-  --card-light:rgba(255,255,255,0.6);
-  --card-dark:rgba(25,25,28,0.6);
+  --card-light:rgba(255,255,255,0.65);
+  --card-dark:rgba(25,25,28,0.65);
   --text-light:#111;
   --text-dark:#fff;
   --accent:#4f46e5;
@@ -24,6 +24,7 @@
   padding:0;
   box-sizing:border-box;
   font-family:"Inter",sans-serif;
+  scroll-behavior:smooth;
 }
 
 body{
@@ -74,6 +75,7 @@ nav button{
   align-items:center;
   text-align:center;
   padding:0 20px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,0.03));
 }
 
 .hero h1{
@@ -106,7 +108,7 @@ nav button{
   box-shadow:0 15px 30px rgba(79,70,229,0.4);
 }
 
-/* SECTIONS */
+/* SECTION */
 section{
   padding:120px 20px;
   text-align:center;
@@ -123,7 +125,7 @@ section{
   transform:translateY(0);
 }
 
-/* FLOATING CARDS */
+/* CARDS */
 .cards{
   display:flex;
   justify-content:center;
@@ -141,6 +143,7 @@ section{
   border:1px solid rgba(255,255,255,0.5);
   transition:.4s ease;
   position:relative;
+  overflow:hidden;
 }
 
 body.dark .card{
@@ -151,6 +154,13 @@ body.dark .card{
 .card:hover{
   transform:translateY(-15px);
   box-shadow:0 40px 80px rgba(0,0,0,0.15);
+}
+
+.card i{
+  width:32px;
+  height:32px;
+  margin-bottom:20px;
+  stroke-width:1.5;
 }
 
 /* PRICING */
@@ -208,6 +218,11 @@ body.dark .pricing-card{
   color:white;
   text-decoration:none;
   font-weight:600;
+  transition:.3s;
+}
+
+.pricing-card a:hover{
+  transform:scale(1.05);
 }
 
 /* DOCK */
@@ -217,7 +232,7 @@ body.dark .pricing-card{
   left:50%;
   transform:translateX(-50%);
   backdrop-filter:blur(20px);
-  background:rgba(255,255,255,0.5);
+  background:rgba(255,255,255,0.6);
   padding:15px 30px;
   border-radius:30px;
   display:flex;
@@ -225,17 +240,21 @@ body.dark .pricing-card{
 }
 
 body.dark .dock{
-  background:rgba(20,20,20,0.5);
+  background:rgba(20,20,20,0.6);
 }
 
 .dock a{
   text-decoration:none;
-  font-size:22px;
   transition:.3s;
 }
 
+.dock i{
+  width:28px;
+  height:28px;
+}
+
 .dock a:hover{
-  transform:scale(1.3);
+  transform:scale(1.4);
 }
 
 /* MOBILE */
@@ -260,19 +279,22 @@ body.dark .dock{
 </section>
 
 <section class="reveal">
-  <h2>Features</h2>
+  <h2>Core Features</h2>
   <div class="cards">
     <div class="card">
+      <i data-lucide="terminal"></i>
+      <h3>Advanced Admin</h3>
+      <p>Powerful moderation tools built for serious communities.</p>
+    </div>
+    <div class="card">
+      <i data-lucide="shield-check"></i>
       <h3>Anti-Exploit</h3>
-      <p>Advanced protection built for large Roblox communities.</p>
+      <p>Secure and optimized protection system.</p>
     </div>
     <div class="card">
+      <i data-lucide="webhook"></i>
       <h3>Webhook Logging</h3>
-      <p>Full Discord integration and moderation tracking.</p>
-    </div>
-    <div class="card">
-      <h3>High Performance</h3>
-      <p>Optimized for speed and reliability.</p>
+      <p>Full Discord logging and punishment tracking.</p>
     </div>
   </div>
 </section>
@@ -307,9 +329,9 @@ body.dark .dock{
 </section>
 
 <div class="dock">
-  <a href="https://discord.com" target="_blank">💬</a>
-  <a href="https://github.com" target="_blank">💻</a>
-  <a href="https://twitter.com" target="_blank">🐦</a>
+  <a href="https://discord.com" target="_blank"><i data-lucide="message-circle"></i></a>
+  <a href="https://github.com" target="_blank"><i data-lucide="github"></i></a>
+  <a href="https://twitter.com" target="_blank"><i data-lucide="twitter"></i></a>
 </div>
 
 <script>
@@ -320,12 +342,13 @@ function toggleMode(){
 const reveals=document.querySelectorAll(".reveal");
 window.addEventListener("scroll",()=>{
   reveals.forEach(el=>{
-    const top=el.getBoundingClientRect().top;
-    if(top<window.innerHeight-100){
+    if(el.getBoundingClientRect().top<window.innerHeight-100){
       el.classList.add("active");
     }
   });
 });
+
+lucide.createIcons();
 </script>
 
 </body>
