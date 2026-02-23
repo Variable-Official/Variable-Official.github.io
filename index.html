@@ -282,65 +282,70 @@ nav a:hover{color:var(--text);}
     color:var(--muted);
 }
 
-/* Testimonials */
-.testimonial{text-align:left;}
+/* Premium Testimonials */
+.testimonial{
+    text-align:left;
+    backdrop-filter:blur(20px);
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,0.05),
+        rgba(255,255,255,0.02)
+    );
+    border:1px solid rgba(0,198,255,0.15);
+    overflow:hidden;
+    position:relative;
+}
+
+.testimonial::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at top left, rgba(0,198,255,0.25), transparent 50%);
+    opacity:.4;
+    pointer-events:none;
+}
 
 .stars{
-    color:#00c6ff;
-    margin-bottom:15px;
+    font-size:18px;
+    letter-spacing:3px;
+    background:linear-gradient(90deg,#0071e3,#00c6ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:20px;
 }
 
 .quote{
-    font-size:16px;
-    color:var(--muted);
-    line-height:1.6;
-    margin-bottom:25px;
+    font-size:17px;
+    line-height:1.7;
+    margin-bottom:30px;
 }
 
 .user{
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:18px;
 }
 
 .user img{
-    width:48px;
-    height:48px;
+    width:60px;
+    height:60px;
     border-radius:50%;
-    object-fit:cover;
-    border:2px solid var(--border);
+    border:2px solid rgba(0,198,255,0.4);
+    box-shadow:0 0 20px rgba(0,198,255,0.3);
 }
 
-.user span{
+.user-info span{
     display:block;
-    font-size:13px;
+    font-size:14px;
     color:var(--muted);
 }
 
-/* Dock */
-.dock{
-    position:fixed;
-    bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(30px);
-    border:1px solid var(--border);
-    padding:12px 20px;
-    border-radius:28px;
-    display:flex;
-    gap:25px;
+.verified{
+    color:#00c6ff;
+    margin-left:6px;
 }
 
-.dock a{
-    font-size:24px;
-    color:var(--text);
-    transition:transform .2s ease;
-}
-.dock a:hover{
-    transform:scale(1.6) translateY(-8px);
-}
-
+/* Footer */
 footer{
     padding:80px 20px;
     text-align:center;
@@ -397,7 +402,6 @@ footer{
     <p>Choose the plan that fits your community.</p>
 
     <div class="grid">
-
         <div class="card">
             <h4>Free</h4>
             <p style="font-size:36px;margin:20px 0;">0 Robux</p>
@@ -420,25 +424,23 @@ footer{
                 <li>Priority Support</li>
             </ul>
         </div>
-
     </div>
 </section>
 
 <section class="section" id="testimonials">
-    <h3>Trusted by Roblox Developers</h3>
-    <p>See what community owners are saying about STARR.</p>
+    <h3>Loved by Roblox Developers</h3>
+    <p>Real feedback from real community owners.</p>
 
     <div class="grid">
         <div class="card testimonial">
-            <div class="stars">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-            </div>
-            <p class="quote">“The anti-exploit system alone is worth it. Best moderation tool we’ve used.”</p>
+            <div class="stars">★★★★★</div>
+            <p class="quote">“STARR completely transformed moderation for my games.”</p>
             <div class="user">
-                <img src="https://i.pravatar.cc/150?img=2">
-                <div><strong>FJFG11</strong><span>Community Manager</span></div>
+                <img src="https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=421517931&size=150x150&format=Png&isCircular=true">
+                <div class="user-info">
+                    <strong>FJFG11 <span class="verified">✔</span></strong>
+                    <span>Community Manager</span>
+                </div>
             </div>
         </div>
     </div>
@@ -456,11 +458,6 @@ footer{
 <footer>
 © 2026 Variable Studios
 </footer>
-
-<div class="dock">
-    <a href="https://discord.gg/2SmMSSkmmv" target="_blank"><i class="fa-brands fa-discord"></i></a>
-    <a href="https://vaultroblox.com/" target="_blank"><i class="fa-solid fa-cart-shopping"></i></a>
-</div>
 
 <script>
 window.addEventListener("scroll",()=>{
