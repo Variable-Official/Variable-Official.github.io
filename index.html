@@ -3,353 +3,446 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Studio</title>
+<title>Variable Studios</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root{
-  --bg-light:#f5f5f7;
-  --bg-dark:#0f0f12;
-  --card-light:rgba(255,255,255,0.65);
-  --card-dark:rgba(25,25,28,0.65);
-  --text-light:#111;
-  --text-dark:#fff;
-  --accent:#4f46e5;
+    --bg:#000;
+    --text:#fff;
+    --muted:#aaa;
+    --card:#111;
+    --border:rgba(255,255,255,0.08);
+    --nav:rgba(0,0,0,0.6);
+}
+
+body.light{
+    --bg:#f5f5f7;
+    --text:#111;
+    --muted:#555;
+    --card:#fff;
+    --border:rgba(0,0,0,0.08);
+    --nav:rgba(255,255,255,0.7);
 }
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-  scroll-behavior:smooth;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
 }
+
+html{scroll-behavior:smooth;}
 
 body{
-  background:var(--bg-light);
-  color:var(--text-light);
-  transition:.4s ease;
-  overflow-x:hidden;
-}
-
-body.dark{
-  background:var(--bg-dark);
-  color:var(--text-dark);
+    background:var(--bg);
+    color:var(--text);
+    transition:.4s ease;
+    overflow-x:hidden;
 }
 
 /* NAV */
 nav{
-  position:fixed;
-  width:100%;
-  top:0;
-  backdrop-filter:blur(20px);
-  background:rgba(255,255,255,0.5);
-  padding:20px 60px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:1000;
+    position:fixed;
+    width:100%;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    backdrop-filter:blur(20px);
+    background:var(--nav);
+    border-bottom:1px solid var(--border);
+    z-index:1000;
 }
 
-body.dark nav{
-  background:rgba(20,20,20,0.5);
+nav h1{font-size:18px;}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    align-items:center;
 }
 
-nav button{
-  padding:8px 18px;
-  border-radius:20px;
-  border:none;
-  cursor:pointer;
-  background:var(--accent);
-  color:white;
+nav a{
+    text-decoration:none;
+    color:var(--muted);
+    font-size:14px;
+    transition:.3s;
+}
+nav a:hover{color:var(--text);}
+
+.menu-btn{
+    display:none;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.mobile-menu{
+    position:fixed;
+    top:0;
+    right:-100%;
+    height:100vh;
+    width:280px;
+    backdrop-filter:blur(30px);
+    background:var(--nav);
+    padding:100px 30px;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+    transition:.4s ease;
+    z-index:999;
+}
+.mobile-menu.active{right:0;}
+
+.mobile-menu a{
+    text-decoration:none;
+    color:var(--text);
+    font-size:18px;
 }
 
 /* HERO */
 .hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 20px;
-  background:linear-gradient(180deg,transparent,rgba(0,0,0,0.03));
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    padding:0 20px;
 }
 
-.hero h1{
-  font-size:64px;
-  font-weight:700;
-  margin-bottom:20px;
-  background:linear-gradient(90deg,#4f46e5,#6366f1);
-  -webkit-background-clip:text;
-  color:transparent;
+.hero-bg{
+    position:absolute;
+    width:150%;
+    height:150%;
+    top:-25%;
+    left:-25%;
+    background:radial-gradient(circle at center,#0071e3,transparent 60%);
+    filter:blur(140px);
+    z-index:-1;
+    transition:transform .2s ease-out;
+}
+
+.hero h2{
+    font-size:clamp(48px,8vw,88px);
+    letter-spacing:-2px;
 }
 
 .hero p{
-  font-size:20px;
-  opacity:.8;
-  margin-bottom:30px;
+    margin-top:20px;
+    font-size:22px;
+    color:var(--muted);
+    max-width:700px;
 }
 
-.hero a{
-  padding:14px 30px;
-  border-radius:999px;
-  background:var(--accent);
-  color:white;
-  text-decoration:none;
-  font-weight:600;
-  transition:.3s;
+.hero-buttons{
+    margin-top:40px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
 }
 
-.hero a:hover{
-  transform:scale(1.05);
-  box-shadow:0 15px 30px rgba(79,70,229,0.4);
+/* Buttons */
+.btn{
+    padding:14px 34px;
+    border-radius:999px;
+    font-size:16px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:.3s ease;
 }
 
-/* SECTION */
-section{
-  padding:120px 20px;
-  text-align:center;
+.primary-btn{
+    background:linear-gradient(135deg,#0071e3,#00c6ff);
+    color:white;
+}
+.primary-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(0,113,227,0.4);
 }
 
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
+.secondary-btn{
+    border:1px solid var(--border);
+    color:var(--text);
+}
+.secondary-btn:hover{
+    background:var(--card);
+    transform:translateY(-4px);
 }
 
-.reveal.active{
-  opacity:1;
-  transform:translateY(0);
+/* SECTIONS */
+.section{
+    padding:140px 40px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(60px);
+    transition:1.1s cubic-bezier(.16,1,.3,1);
+}
+.section.visible{
+    opacity:1;
+    transform:translateY(0);
 }
 
-/* CARDS */
-.cards{
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  flex-wrap:wrap;
-  margin-top:60px;
+.section h3{font-size:44px;}
+.section p{
+    margin-top:20px;
+    font-size:18px;
+    color:var(--muted);
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* Cards */
+.grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:40px;
 }
 
 .card{
-  width:300px;
-  padding:40px;
-  border-radius:30px;
-  backdrop-filter:blur(20px);
-  background:var(--card-light);
-  border:1px solid rgba(255,255,255,0.5);
-  transition:.4s ease;
-  position:relative;
-  overflow:hidden;
+    position:relative;
+    padding:60px 30px;
+    border-radius:28px;
+    background:var(--card);
+    border:1px solid var(--border);
+    overflow:hidden;
+    transition:.3s ease;
 }
 
-body.dark .card{
-  background:var(--card-dark);
-  border:1px solid rgba(255,255,255,0.05);
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.25), transparent 40%);
+    opacity:0;
+    transition:.3s;
 }
 
 .card:hover{
-  transform:translateY(-15px);
-  box-shadow:0 40px 80px rgba(0,0,0,0.15);
+    transform:translateY(-10px);
+    box-shadow:0 30px 80px rgba(0,0,0,0.25);
 }
+.card:hover::before{opacity:1;}
 
 .card i{
-  width:32px;
-  height:32px;
-  margin-bottom:20px;
-  stroke-width:1.5;
-}
-
-/* PRICING */
-.pricing{
-  display:flex;
-  gap:40px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:60px;
-}
-
-.pricing-card{
-  width:340px;
-  padding:40px;
-  border-radius:28px;
-  backdrop-filter:blur(20px);
-  background:var(--card-light);
-  border:1px solid rgba(255,255,255,0.5);
-  transition:.4s;
-}
-
-body.dark .pricing-card{
-  background:var(--card-dark);
-  border:1px solid rgba(255,255,255,0.05);
-}
-
-.pricing-card:hover{
-  transform:translateY(-10px);
-}
-
-.price{
-  font-size:48px;
-  margin:20px 0;
-}
-
-.features{
-  list-style:none;
-  margin:20px 0;
-  text-align:left;
-}
-
-.features li{
-  margin:12px 0;
-}
-
-.yes{color:#16a34a;}
-.no{color:#dc2626;}
-
-.pricing-card a{
-  display:block;
-  margin-top:20px;
-  padding:12px;
-  border-radius:999px;
-  background:var(--accent);
-  color:white;
-  text-decoration:none;
-  font-weight:600;
-  transition:.3s;
-}
-
-.pricing-card a:hover{
-  transform:scale(1.05);
+    font-size:28px;
+    margin-bottom:15px;
 }
 
 /* DOCK */
 .dock{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  backdrop-filter:blur(20px);
-  background:rgba(255,255,255,0.6);
-  padding:15px 30px;
-  border-radius:30px;
-  display:flex;
-  gap:25px;
-}
-
-body.dark .dock{
-  background:rgba(20,20,20,0.6);
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(30px);
+    border:1px solid var(--border);
+    padding:12px 20px;
+    border-radius:28px;
+    display:flex;
+    gap:25px;
+    z-index:1000;
 }
 
 .dock a{
-  text-decoration:none;
-  transition:.3s;
+    font-size:24px;
+    color:var(--text);
+    transition:.2s ease;
 }
-
-.dock i{
-  width:28px;
-  height:28px;
-}
-
 .dock a:hover{
-  transform:scale(1.4);
+    transform:scale(1.6) translateY(-8px);
 }
 
-/* MOBILE */
+/* FOOTER */
+footer{
+    padding:80px 20px 140px;
+    text-align:center;
+    color:var(--muted);
+}
+
+/* Responsive */
 @media(max-width:768px){
-  .hero h1{font-size:40px;}
-  nav{padding:20px;}
+    .nav-links{display:none;}
+    .menu-btn{display:block;}
+    .section{padding:100px 20px;}
 }
 </style>
 </head>
-
 <body>
 
 <nav>
-  <h3>YourStudio</h3>
-  <button onclick="toggleMode()">Toggle Mode</button>
+    <h1>Variable Studios</h1>
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+        <i class="fa-solid fa-circle-half-stroke" id="toggle" style="cursor:pointer;"></i>
+    </div>
+    <i class="fa-solid fa-bars menu-btn" id="menuBtn"></i>
 </nav>
 
-<section class="hero">
-  <h1>Modern Roblox Systems</h1>
-  <p>Premium admin systems. Clean design. Powerful performance.</p>
-  <a href="https://google.com" target="_blank">Get Started</a>
-</section>
-
-<section class="reveal">
-  <h2>Core Features</h2>
-  <div class="cards">
-    <div class="card">
-      <i data-lucide="terminal"></i>
-      <h3>Advanced Admin</h3>
-      <p>Powerful moderation tools built for serious communities.</p>
-    </div>
-    <div class="card">
-      <i data-lucide="shield-check"></i>
-      <h3>Anti-Exploit</h3>
-      <p>Secure and optimized protection system.</p>
-    </div>
-    <div class="card">
-      <i data-lucide="webhook"></i>
-      <h3>Webhook Logging</h3>
-      <p>Full Discord logging and punishment tracking.</p>
-    </div>
-  </div>
-</section>
-
-<section class="reveal">
-  <h2>Pricing</h2>
-  <div class="pricing">
-    <div class="pricing-card">
-      <h3>Free</h3>
-      <div class="price">0 Robux</div>
-      <ul class="features">
-        <li class="yes">✔ Standard Admin</li>
-        <li class="no">✖ No Anti-Exploit</li>
-        <li class="no">✖ No Webhook Logging</li>
-        <li class="yes">✔ Standard Support</li>
-      </ul>
-      <a href="https://google.com" target="_blank">Install Now</a>
-    </div>
-
-    <div class="pricing-card">
-      <h3>Plus</h3>
-      <div class="price">250 Robux</div>
-      <ul class="features">
-        <li class="yes">✔ Improved Admin</li>
-        <li class="yes">✔ Anti-Exploit</li>
-        <li class="yes">✔ Webhook Logging</li>
-        <li class="yes">✔ Priority Support</li>
-      </ul>
-      <a href="https://google.com" target="_blank">Buy Now</a>
-    </div>
-  </div>
-</section>
-
-<div class="dock">
-  <a href="https://discord.com" target="_blank"><i data-lucide="message-circle"></i></a>
-  <a href="https://github.com" target="_blank"><i data-lucide="github"></i></a>
-  <a href="https://twitter.com" target="_blank"><i data-lucide="twitter"></i></a>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
 </div>
 
-<script>
-function toggleMode(){
-  document.body.classList.toggle("dark");
-}
+<section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <h2>Precision Moderation.</h2>
+    <p>Built for Roblox developers who expect performance and elegance.</p>
 
-const reveals=document.querySelectorAll(".reveal");
+    <div class="hero-buttons">
+        <a href="https://discord.gg/2SmMSSkmmv" target="_blank" class="btn primary-btn">
+            <i class="fa-brands fa-discord"></i> Join Discord
+        </a>
+        <a href="https://www.roblox.com/communities/753140944/Variable-Official#!/about" target="_blank" class="btn secondary-btn">
+            <i class="fa-solid fa-people-group"></i> Roblox Group
+        </a>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <h3>Designed for Developers</h3>
+    <p>Clean architecture. Powerful permissions. Seamless integration.</p>
+</section>
+
+<section class="section" id="features">
+    <h3>Features</h3>
+    <div class="grid">
+        <div class="card">
+            <i class="fa-solid fa-bolt"></i>
+            <h4>Fast Integration</h4>
+            <p>Deploy within minutes with minimal setup.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h4>Advanced Security</h4>
+            <p>Role-based permissions and full logging.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-star"></i>
+            <h4>STARR Plus</h4>
+            <p>Unlock advanced moderation capabilities.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="contact">
+    <h3>Get Started</h3>
+    <div class="hero-buttons">
+        <a href="https://vaultroblox.com/" target="_blank" class="btn primary-btn">
+            <i class="fa-solid fa-cart-shopping"></i> Buy STARR
+        </a>
+    </div>
+</section>
+
+<footer>
+© 2026 Variable Studios
+</footer>
+
+<div class="dock">
+    <a href="https://discord.gg/2SmMSSkmmv" target="_blank"><i class="fa-brands fa-discord"></i></a>
+    <a href="https://www.roblox.com/communities/753140944/Variable-Official#!/about" target="_blank"><i class="fa-solid fa-gamepad"></i></a>
+    <a href="https://vaultroblox.com/" target="_blank"><i class="fa-solid fa-cart-shopping"></i></a>
+</div>
+
+
+<section class="section" id="pricing">
+    <h3>Pricing</h3>
+    <p>Choose the plan that fits your community.</p>
+
+    <div class="grid" style="margin-top:70px;">
+
+        <!-- Free Tier -->
+        <div class="card">
+            <i class="fa-solid fa-seedling"></i>
+            <h4>Free</h4>
+            <p style="font-size:36px;margin:20px 0;">0 Robux</p>
+            <p>✔ Standard Admin</p>
+            <p>✖ No Anti-Exploit</p>
+            <p>✖ No Webhook Logging</p>
+            <p>✔ Community Support</p>
+
+            <div class="hero-buttons" style="margin-top:30px;">
+                <a href="https://www.roblox.com/communities/753140944/Variable-Official#!/about" target="_blank" class="btn secondary-btn">
+                    Get Free
+                </a>
+            </div>
+        </div>
+
+        <!-- Plus Tier -->
+        <div class="card">
+            <i class="fa-solid fa-crown"></i>
+            <h4>STARR Plus</h4>
+            <p style="font-size:36px;margin:20px 0;">250 Robux</p>
+            <p>✔ Advanced Admin</p>
+            <p>✔ Anti-Exploit</p>
+            <p>✔ Webhook Logging</p>
+            <p>✔ Priority Support</p>
+
+            <div class="hero-buttons" style="margin-top:30px;">
+                <a href="https://vaultroblox.com/" target="_blank" class="btn primary-btn">
+                    Buy Now
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+/* Parallax */
+const heroBg=document.getElementById("heroBg");
 window.addEventListener("scroll",()=>{
-  reveals.forEach(el=>{
-    if(el.getBoundingClientRect().top<window.innerHeight-100){
-      el.classList.add("active");
-    }
-  });
+    heroBg.style.transform=`translateY(${window.scrollY*0.3}px)`;
 });
 
-lucide.createIcons();
+/* Scroll Reveal */
+const sections=document.querySelectorAll(".section");
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+        }
+    });
+},{threshold:0.2});
+sections.forEach(sec=>observer.observe(sec));
+
+/* Card Lighting */
+document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("mousemove",e=>{
+        const rect=card.getBoundingClientRect();
+        const x=e.clientX-rect.left;
+        const y=e.clientY-rect.top;
+        card.style.setProperty("--x",x+"px");
+        card.style.setProperty("--y",y+"px");
+    });
+});
+
+/* Theme */
+document.getElementById("toggle").onclick=()=>{
+    document.body.classList.toggle("light");
+};
+
+/* Mobile Menu */
+const menuBtn=document.getElementById("menuBtn");
+const mobileMenu=document.getElementById("mobileMenu");
+menuBtn.onclick=()=>mobileMenu.classList.toggle("active");
 </script>
 
 </body>
 </html>
+
+
+
+
