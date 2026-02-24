@@ -61,6 +61,7 @@ nav h1{font-size:18px;}
 .nav-links{
     display:flex;
     gap:30px;
+    align-items:center;
 }
 
 nav a{
@@ -134,7 +135,7 @@ nav a:hover{color:var(--text);}
     margin-right:auto;
 }
 
-/* Floating Cards */
+/* GRID */
 .grid{
     margin-top:60px;
     display:grid;
@@ -142,6 +143,7 @@ nav a:hover{color:var(--text);}
     gap:40px;
 }
 
+/* CARDS */
 .card{
     position:relative;
     padding:60px 30px;
@@ -174,6 +176,68 @@ nav a:hover{color:var(--text);}
 .card i{
     font-size:28px;
     margin-bottom:15px;
+}
+
+/* REVIEWS */
+.review-card{
+    text-align:left;
+    backdrop-filter:blur(20px);
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,0.05),
+        rgba(255,255,255,0.02)
+    );
+    border:1px solid rgba(0,113,227,0.2);
+}
+
+.review-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at top left, rgba(0,113,227,0.25), transparent 60%);
+    opacity:.35;
+    pointer-events:none;
+}
+
+.stars{
+    font-size:18px;
+    letter-spacing:3px;
+    background:linear-gradient(90deg,#0071e3,#00c6ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:20px;
+}
+
+.review-text{
+    font-size:17px;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+.review-user{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.review-user img{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:2px solid rgba(0,113,227,0.4);
+    box-shadow:0 0 20px rgba(0,113,227,0.3);
+}
+
+.review-user span{
+    display:block;
+    font-size:14px;
+    color:var(--muted);
+}
+
+.verified{
+    color:#00c6ff;
+    margin-left:6px;
+    font-size:14px;
 }
 
 /* DOCK */
@@ -216,6 +280,7 @@ nav a:hover{color:var(--text);}
     <div class="nav-links">
         <a href="#about">About</a>
         <a href="#features">Features</a>
+        <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
         <i class="fa-solid fa-circle-half-stroke theme-toggle" id="toggle"></i>
     </div>
@@ -254,6 +319,26 @@ nav a:hover{color:var(--text);}
     </div>
 </section>
 
+<section class="section" id="reviews">
+    <h3>Trusted by Developers</h3>
+    <div class="grid">
+        <div class="card review-card">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">
+                “STARR completely upgraded our moderation workflow.
+                Fast, reliable, and incredibly polished.”
+            </p>
+            <div class="review-user">
+                <img src="https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=421517931&size=150x150&format=Png&isCircular=true">
+                <div>
+                    <strong>FJFG11 <span class="verified">✔</span></strong>
+                    <span>Variable Founder</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="section" id="contact">
     <h3>Get Started</h3>
     <p>Join our community and upgrade your moderation system today.</p>
@@ -270,13 +355,11 @@ nav a:hover{color:var(--text);}
 </div>
 
 <script>
-/* Parallax */
 const heroBg=document.getElementById("heroBg");
 window.addEventListener("scroll",()=>{
     heroBg.style.transform=`translateY(${window.scrollY*0.3}px)`;
 });
 
-/* Scroll Reveal */
 const sections=document.querySelectorAll(".section");
 const observer=new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
@@ -287,7 +370,6 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 sections.forEach(sec=>observer.observe(sec));
 
-/* Dynamic Card Lighting */
 document.querySelectorAll(".card").forEach(card=>{
     card.addEventListener("mousemove",e=>{
         const rect=card.getBoundingClientRect();
@@ -298,7 +380,6 @@ document.querySelectorAll(".card").forEach(card=>{
     });
 });
 
-/* Theme Toggle */
 document.getElementById("toggle").onclick=()=>{
     document.body.classList.toggle("light");
 };
