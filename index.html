@@ -83,9 +83,9 @@ footer{padding:60px 20px;text-align:center;color:var(--muted);border-top:1px sol
 
 /* PREVIEW SLIDER */
 .preview-container{position:relative;margin-top:60px;overflow:hidden;}
-.preview-slider{display:flex;gap:30px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:10px;}
+.preview-slider{display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:10px;}
 .preview-slider::-webkit-scrollbar{display:none;}
-.preview-card{flex:0 0 300px;padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--border);transition:.4s ease;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
+.preview-card{flex:0 0 auto;padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--border);transition:.4s ease;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
 .preview-card img{width:100%;border-radius:15px;margin-bottom:15px;}
 .preview-card h4{margin-bottom:10px;}
 .preview-card p{font-size:14px;color:var(--muted);}
@@ -167,12 +167,22 @@ footer{padding:60px 20px;text-align:center;color:var(--muted);border-top:1px sol
             <div class="preview-card">
                 <img src="images/BanFrame.webp" alt="BanFrame">
                 <h4>Banishment Overview</h4>
-                <p>Banish players with roblox API bans intergrated into a clean detailed Gui.</p>
+                <p>Banish players with Roblox API bans integrated into a clean detailed GUI.</p>
             </div>
             <div class="preview-card">
                 <img src="images/AEFrame.webp" alt="AEFrame">
                 <h4>Anti-Exploit Logs</h4>
-                <p>View anti-exxploit logs across your server and game.</p>
+                <p>View anti-exploit logs across your server and game.</p>
+            </div>
+            <div class="preview-card">
+                <img src="images/Reports.webp" alt="Reports">
+                <h4>Reports Panel</h4>
+                <p>Handle player reports quickly and efficiently.</p>
+            </div>
+            <div class="preview-card">
+                <img src="images/Dashboard.webp" alt="Dashboard">
+                <h4>Dashboard Overview</h4>
+                <p>Monitor everything from one central interface.</p>
             </div>
         </div>
     </div>
@@ -236,10 +246,28 @@ const saved=localStorage.getItem("theme");
 if(saved){setTheme(saved);}
 else if(window.matchMedia('(prefers-color-scheme: light)').matches){setTheme("light");}
 
+/* RESPONSIVE PREVIEW CARD SIZING */
+function resizePreviewCards() {
+    const slider = document.querySelector(".preview-slider");
+    const cards = slider.querySelectorAll(".preview-card");
+    const containerWidth = slider.offsetWidth;
+
+    let visibleCount = 1;
+    if (containerWidth > 1200) visibleCount = 4;
+    else if (containerWidth > 900) visibleCount = 3;
+    else if (containerWidth > 600) visibleCount = 2;
+
+    const cardWidth = (containerWidth - (20*(visibleCount-1))) / visibleCount; // 20px gap
+    cards.forEach(card => { card.style.flex = `0 0 ${cardWidth}px`; });
+}
+
+window.addEventListener("resize", resizePreviewCards);
+window.addEventListener("load", resizePreviewCards);
+
 /* PREVIEW SLIDER ARROWS */
 const slider=document.querySelector(".preview-slider");
-document.querySelector(".arrow-left").addEventListener("click",()=>{slider.scrollBy({left:-320,behavior:'smooth'});});
-document.querySelector(".arrow-right").addEventListener("click",()=>{slider.scrollBy({left:320,behavior:'smooth'});});
+document.querySelector(".arrow-left").addEventListener("click",()=>{slider.scrollBy({left:-slider.offsetWidth/2,behavior:'smooth'});});
+document.querySelector(".arrow-right").addEventListener("click",()=>{slider.scrollBy({left:slider.offsetWidth/2,behavior:'smooth'});});
 </script>
 
 </body>
