@@ -140,7 +140,7 @@ nav a:hover{color:var(--text);}
 .grid{
     margin-top:40px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
 }
 
@@ -154,13 +154,14 @@ nav a:hover{color:var(--text);}
     overflow:hidden;
     transition:.3s ease;
     transform-style:preserve-3d;
+    text-align:left;
 }
 
 .card::before{
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.25), transparent 40%);
+    background:radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.15), transparent 40%);
     opacity:0;
     transition:.3s;
 }
@@ -174,62 +175,14 @@ nav a:hover{color:var(--text);}
     opacity:1;
 }
 
-.card i{
-    font-size:24px;
-    margin-bottom:10px;
+.card h4{
+    font-size:22px;
+    margin-bottom:15px;
 }
 
-/* REVIEWS (Compact) */
-.review-card{
-    text-align:left;
-    backdrop-filter:blur(20px);
-    background:linear-gradient(
-        145deg,
-        rgba(255,255,255,0.05),
-        rgba(255,255,255,0.02)
-    );
-    border:1px solid rgba(0,113,227,0.2);
-}
-
-.stars{
-    font-size:14px;
-    letter-spacing:3px;
-    background:linear-gradient(90deg,#0071e3,#00c6ff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin-bottom:12px;
-}
-
-.review-text{
+.card p{
     font-size:15px;
-    line-height:1.6;
-    margin-bottom:18px;
-}
-
-.review-user{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.review-user img{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    border:2px solid rgba(0,113,227,0.4);
-    box-shadow:0 0 15px rgba(0,113,227,0.3);
-}
-
-.review-user span{
-    display:block;
-    font-size:13px;
-    color:var(--muted);
-}
-
-.verified{
-    color:#00c6ff;
-    margin-left:6px;
-    font-size:13px;
+    margin-bottom:8px;
 }
 
 /* DOCK */
@@ -272,7 +225,7 @@ nav a:hover{color:var(--text);}
     <div class="nav-links">
         <a href="#about">About</a>
         <a href="#features">Features</a>
-        <a href="#reviews">Reviews</a>
+        <a href="#tiers">STARR Tiers</a>
         <a href="#contact">Contact</a>
         <i class="fa-solid fa-circle-half-stroke theme-toggle" id="toggle"></i>
     </div>
@@ -310,27 +263,33 @@ nav a:hover{color:var(--text);}
     </div>
 </section>
 
-<section class="section" id="reviews">
-    <h3>Trusted by Developers</h3>
+<!-- STARR Tiers Section -->
+<section class="section" id="tiers">
+    <h3>STARR Tiers</h3>
+    <p>Choose the tier that fits your community needs.</p>
+
     <div class="grid">
 
-        <div class="card review-card">
-            <div class="stars">★★★★★</div>
-            <p class="review-text">
-                “STARR completely upgraded our moderation workflow.
-                Fast, reliable, and polished.”
-            </p>
-            <div class="review-user">
-                <img 
-                    src="https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=123456789&size=150x150&format=Png&isCircular=true"
-                    crossorigin="anonymous"
-                    onerror="this.src='images/noFilter (8).webp';"
-                >
-                <div>
-                    <strong>FJFG11 <span class="verified">✔</span></strong>
-                    <span>Founder</span>
-                </div>
-            </div>
+        <!-- Free Tier -->
+        <div class="card">
+            <h4>STARR: Free</h4>
+            <p><strong>Standard Admin Commands:</strong></p>
+            <p>{Kick, ban, unban, warn, kill, heal, to, bring, announce, global announce, speed, jump height, invis, vis, commands, chatlogs, commandlogs}</p>
+            <p><strong>Roles & Permissions:</strong> Mod = {level = 50, perms = {kick = true, bring = true}} <br> Owner = {level = 100, perms = {all = true}}</p>
+            <p><strong>AntiExploit:</strong> None (may add in future)</p>
+            <p><strong>Webhook Logging:</strong> None (may add in future)</p>
+            <p><strong>GUI:</strong> Included (some features restricted)</p>
+        </div>
+
+        <!-- Plus+ Tier -->
+        <div class="card">
+            <h4>STARR: Plus+</h4>
+            <p><strong>Commands Plus:</strong></p>
+            <p>{Kick, ban, unban, warn, kill, heal, to, bring, announce, global announce, speed, jump height, invis, vis, commands, chatlogs, commandlogs, exploitlogs, avatar, clone}</p>
+            <p><strong>Roles & Permissions:</strong> Mod = {level = 50, perms = {kick = true, bring = true}} <br> Owner = {level = 100, perms = {all = true}}</p>
+            <p><strong>AntiExploit:</strong> Covers {Speed, Jumpheight, teleport, noclip, godmode} with punishments configurable</p>
+            <p><strong>Webhook Logging:</strong> Bans, Kicks, Warns, Exploit punishments</p>
+            <p><strong>GUI:</strong> Included fully</p>
         </div>
 
     </div>
@@ -344,6 +303,12 @@ nav a:hover{color:var(--text);}
 <footer style="padding:80px 20px 140px;text-align:center;color:var(--muted);">
 © 2026 Variable Studios
 </footer>
+
+<div class="dock">
+    <a href="#"><i class="fa-brands fa-discord"></i></a>
+    <a href="#"><i class="fa-solid fa-gamepad"></i></a>
+    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+</div>
 
 <script>
 const heroBg=document.getElementById("heroBg");
