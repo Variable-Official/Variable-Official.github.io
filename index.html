@@ -27,7 +27,7 @@ body.light{
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;}
-html{scroll-behavior:smooth;} /* Smooth Scroll Enabled */
+html{scroll-behavior:smooth;} /* Smooth scroll added */
 body{
     background:var(--bg);
     color:var(--text);
@@ -95,9 +95,9 @@ nav a:hover{color:#00c6ff;}
 .secondary-btn:hover{background:var(--card);transform:translateY(-3px);}
 
 /* SECTIONS */
-.section{padding:100px 40px;text-align:center;border-top:1px solid var(--border);}
+.section{padding:100px 40px;text-align:center;}
 .section h3{font-size:38px;font-weight:700;margin-bottom:15px;}
-.section p{font-size:16px;color:var(--muted);max-width:600px;margin:auto;line-height:1.5;}
+.section p{font-size:16px;color:var(--muted);max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5;}
 
 /* GRID */
 .grid{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
@@ -106,7 +106,7 @@ nav a:hover{color:#00c6ff;}
 .card,
 .review-card{padding:30px 20px;border-radius:20px;background:var(--card);border:1px solid var(--border);transition:.4s ease;box-shadow:0 5px 15px rgba(0,0,0,0.08);}
 .card:hover,
-.review-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,113,227,0.15);}
+.review-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,0.12);}
 .card i{font-size:26px;margin-bottom:10px;}
 .card h4{font-size:18px;margin-bottom:8px;}
 .card p{font-size:14px;color:var(--muted);}
@@ -283,7 +283,7 @@ footer{padding:40px 20px;text-align:center;color:var(--muted);font-size:14px;bor
         <div class="review-card">
             <div class="review-header">
                 <img src="images/BuildermanPfp.webp" alt="Builderman" loading="lazy">
-                <div><h4>Someone</h4><span>Roblox Man</span></div>
+                <div><h4>Builderman</h4><span>Roblox Man</span></div>
             </div>
             <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             <p>The Plus+ tools are powerful and easy to configure.</p>
@@ -335,7 +335,7 @@ document.querySelector(".arrow-right").addEventListener("click",()=>{slider.scro
 const canvas=document.getElementById("particles-bg");
 const ctx=canvas.getContext("2d");
 let particles=[];
-const count=window.innerWidth < 768 ? 40 : 80;
+const count=80;
 
 function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
 resize();addEventListener("resize",resize);
@@ -365,4 +365,8 @@ this.draw();
 
 function init(){particles=[];for(let i=0;i<count;i++)particles.push(new Particle());}
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>p.update());requestAnimationFrame(animate);}
-init();animate
+init();animate();
+</script>
+
+</body>
+</html>
