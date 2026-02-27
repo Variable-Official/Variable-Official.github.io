@@ -27,12 +27,40 @@ body.light{
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;}
-html{scroll-behavior:smooth;} /* Smooth scroll added */
+html{scroll-behavior:smooth;} /* Smooth scroll */
 body{
     background:var(--bg);
     color:var(--text);
     transition:.4s;
     position:relative;
+}
+
+/* NOTICE BANNER */
+#notice-banner{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#00c6ff;
+    color:#0d0d0d;
+    text-align:center;
+    padding:15px 20px;
+    font-weight:600;
+    z-index:2000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+#notice-banner p{
+    margin:0;
+    font-size:14px;
+}
+#notice-close{
+    cursor:pointer;
+    font-weight:bold;
+    font-size:20px;
+    line-height:1;
 }
 
 /* PARTICLE BACKGROUND */
@@ -145,6 +173,12 @@ footer{padding:40px 20px;text-align:center;color:var(--muted);font-size:14px;bor
 </head>
 
 <body>
+
+<!-- NOTICE BANNER -->
+<div id="notice-banner" style="display:none;">
+    <p>🛠️ This site is currently under development.</p>
+    <span id="notice-close">&times;</span>
+</div>
 
 <canvas id="particles-bg"></canvas>
 
@@ -365,6 +399,18 @@ this.draw();
 function init(){particles=[];for(let i=0;i<count;i++)particles.push(new Particle());}
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>p.update());requestAnimationFrame(animate);}
 init();animate();
+
+/* NOTICE TOGGLE */
+const showNotice = true; // change to false to hide
+const notice = document.getElementById("notice-banner");
+const closeBtn = document.getElementById("notice-close");
+
+if(showNotice){
+    notice.style.display = "flex";
+}
+closeBtn.addEventListener("click", ()=>{
+    notice.style.display = "none";
+});
 </script>
 
 </body>
