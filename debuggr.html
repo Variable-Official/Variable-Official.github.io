@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variable Studios</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+    --bg:#0d0d0d;
+    --text:#fff;
+    --muted:#aaa;
+    --card:#1a1a1a;
+    --border:rgba(255,255,255,0.08);
+    --nav:rgba(0,0,0,0.7);
+}
+
+body.light{
+    --bg:#f5f5f7;
+    --text:#111;
+    --muted:#555;
+    --card:#fff;
+    --border:rgba(0,0,0,0.08);
+    --nav:rgba(255,255,255,0.9);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;}
+html{scroll-behavior:smooth;} /* Smooth scroll */
+body{
+    background:var(--bg);
+    color:var(--text);
+    transition:.4s;
+    position:relative;
+}
+
+/* NOTICE BANNER */
+#notice-banner{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#00c6ff;
+    color:#0d0d0d;
+    text-align:center;
+    padding:15px 20px;
+    font-weight:600;
+    z-index:2000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+#notice-banner p{
+    margin:0;
+    font-size:14px;
+}
+#notice-close{
+    cursor:pointer;
+    font-weight:bold;
+    font-size:20px;
+    line-height:1;
+}
+
+/* PARTICLE BACKGROUND */
+#particles-bg{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    pointer-events:none;
+}
+
+/* NAVIGATION */
+nav{
+    position:fixed;
+    width:100%;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    backdrop-filter:blur(15px);
+    background:var(--nav);
+    border-bottom:1px solid var(--border);
+    z-index:1000;
+    border-radius:0 0 15px 15px;
+}
+nav h1{font-weight:700;font-size:20px;letter-spacing:1px;}
+nav ul{display:flex;gap:25px;list-style:none;}
+nav a{text-decoration:none;color:var(--muted);font-weight:500;transition:.3s;}
+nav a:hover{color:#00c6ff;}
+.theme-toggle{background:var(--card);border:1px solid var(--border);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.3s;}
+.theme-toggle:hover{transform:scale(1.1);}
+
+/* HERO */
+.hero{
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 15px;
+    gap:15px;
+}
+.hero h2{
+    font-size:clamp(36px,7vw,70px);
+    font-weight:800;
+    background:linear-gradient(135deg,#00c6ff,#0071e3);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.hero p{font-size:18px;max-width:600px;color:var(--muted);}
+.hero-buttons{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+
+/* BUTTONS */
+.btn{padding:12px 28px;border-radius:999px;font-size:15px;text-decoration:none;display:flex;align-items:center;gap:8px;transition:.3s ease;}
+.primary-btn{background:linear-gradient(135deg,#0071e3,#00c6ff);color:white;font-weight:600;}
+.primary-btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,113,227,0.3);}
+.secondary-btn{border:1px solid var(--border);color:var(--text);}
+.secondary-btn:hover{background:var(--card);transform:translateY(-3px);}
+
+/* SECTIONS */
+.section{padding:100px 40px;text-align:center;}
+.section h3{font-size:38px;font-weight:700;margin-bottom:15px;}
+.section p{font-size:16px;color:var(--muted);max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5;}
+
+/* GRID */
+.grid{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+
+/* CARDS */
+.card,
+.review-card{padding:30px 20px;border-radius:20px;background:var(--card);border:1px solid var(--border);transition:.4s ease;box-shadow:0 5px 15px rgba(0,0,0,0.08);}
+.card:hover,
+.review-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,0.12);}
+.card i{font-size:26px;margin-bottom:10px;}
+.card h4{font-size:18px;margin-bottom:8px;}
+.card p{font-size:14px;color:var(--muted);}
+
+/* REVIEWS */
+.review-card{text-align:left;}
+.review-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.review-header img{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid var(--border);}
+.review-header h4{font-size:16px;font-weight:600;}
+.review-header span{font-size:12px;color:var(--muted);}
+.stars{color:#f5c518;margin-bottom:12px;}
+.review-card p{color:var(--muted);line-height:1.4;font-size:14px;}
+
+/* FOOTER */
+footer{padding:40px 20px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--border);}
+
+/* PREVIEW SLIDER */
+.preview-container{position:relative;margin-top:40px;overflow:hidden;}
+.preview-slider{display:flex;gap:15px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:10px;}
+.preview-slider::-webkit-scrollbar{display:none;}
+.preview-card{flex:0 0 auto;padding:15px;border-radius:20px;background:var(--card);border:1px solid var(--border);transition:.4s ease;box-shadow:0 5px 15px rgba(0,0,0,0.08);}
+.preview-card img{width:100%;border-radius:15px;margin-bottom:10px;}
+.preview-card h4{margin-bottom:8px;font-size:16px;}
+.preview-card p{font-size:13px;color:var(--muted);}
+.preview-arrow{position:absolute;top:50%;transform:translateY(-50%);background:var(--card);border:1px solid var(--border);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.3s;z-index:10;}
+.preview-arrow:hover{transform:translateY(-50%) scale(1.1);}
+.arrow-left{left:10px;}
+.arrow-right{right:10px;}
+
+/* PRICING */
+.price{font-size:40px;margin:15px 0;font-weight:700;}
+.pricing-list{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--muted);}
+.pricing-list li::before{content:"✓ ";color:#00c6ff;font-weight:600;}
+.featured{border:1px solid #00c6ff;box-shadow:0 0 40px rgba(0,198,255,0.15);transform:scale(1.05);}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+    <h1>Variable Studios</h1>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#preview">Preview</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+    </ul>
+    <div class="theme-toggle" id="toggle"><i class="fa-solid fa-moon"></i></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h2>Ultimate Moderation.</h2>
+    <p>A beautifully engineered Roblox moderation system built for speed, control, and seamless integration.</p>
+    <div class="hero-buttons">
+        <a href="https://discord.gg/2SmMSSkmmv" target="_blank" class="btn primary-btn">
+            <i class="fa-brands fa-discord"></i> Join Discord
+        </a>
+        <a href="https://www.roblox.com/communities/753140944/Variable-Official#!/about" target="_blank" class="btn secondary-btn">
+            <i class="fa-solid fa-people-group"></i> Roblox Group
+        </a>
+        <a href="https://vaultroblox.com/9b83924d-1cd1-413a-8832-ec0a52fa76f0" target="_blank" class="btn secondary-btn">
+            <i class="fa-solid fa-shop"></i> Our Hub
+        </a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+    <h3>Designed for Moderators</h3>
+    <p>STARR product offers Free and Plus+ tiers. Plus+ unlocks Anti-Exploit systems and advanced Webhook logging.</p>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+    <h3>Features</h3>
+    <div class="grid">
+        <div class="card">
+            <i class="fa-solid fa-bolt"></i>
+            <h4>Instant Setup</h4>
+            <p>Moderate within minutes with minimal configuration.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h4>Advanced Security</h4>
+            <p>Granular role permissions and comprehensive logging.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-star"></i>
+            <h4>STARR Plus</h4>
+            <p>Unlock enhanced tools and advanced moderation systems.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+    <h3>Pricing</h3>
+    <p>Choose the plan that fits your moderation needs.</p>
+    <div class="grid">
+        <div class="card">
+            <h4>Free</h4>
+            <div class="price">R$ 0</div>
+            <ul class="pricing-list">
+                <li>Core Moderation Commands</li>
+                <li>Basic Logging</li>
+                <li>Role Permissions</li>
+            </ul>
+            <a href="https://discord.gg/2SmMSSkmmv" class="btn secondary-btn">Get Started</a>
+        </div>
+        <div class="card featured">
+            <h4>Plus+</h4>
+            <div class="price">R$ 250</div>
+            <ul class="pricing-list">
+                <li>Everything in Free</li>
+                <li>Anti-Exploit System</li>
+                <li>Advanced Webhook Logging</li>
+                <li>Priority Support</li>
+            </ul>
+            <a href="https://discord.gg/2SmMSSkmmv" class="btn primary-btn">Upgrade</a>
+        </div>
+    </div>
+</section>
+
+<!-- PREVIEW -->
+<section class="section" id="preview">
+    <h3>Preview STARR in Action</h3>
+    <p>See STARR’s clean interface and powerful tools in action.</p>
+    <div class="preview-container">
+        <div class="preview-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="preview-arrow arrow-right"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="preview-slider">
+            <div class="preview-card">
+                <img src="images/BanFrame2.webp" loading="lazy">
+                <h4>Banishment Overview</h4>
+                <p>Banish players with Roblox API bans integrated into a clean detailed GUI.</p>
+            </div>
+            <div class="preview-card">
+                <img src="images/AEFrame2.webp" loading="lazy">
+                <h4>Anti-Exploit Logs</h4>
+                <p>View anti-exploit logs across your server and game swiftly and easily.</p>
+            </div>
+            <div class="preview-card">
+                <img src="images/CmdsFrame2.webp" loading="lazy">
+                <h4>Command List</h4>
+                <p>View commands with easy to read commands gui.</p>
+            </div>
+            <div class="preview-card">
+                <img src="images/CmdsLog.webp" loading="lazy">
+                <h4>Command Logging</h4>
+                <p>View commands executed by your moderators.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews">
+    <h3>What People Say</h3>
+    <div class="grid">
+        <div class="review-card">
+            <div class="review-header">
+                <img src="images/noFilter-(9).webp" alt="FJFG11" loading="lazy">
+                <div><h4>FJFG11</h4><span>Variable Founder</span></div>
+            </div>
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p>STARR completely transformed my games moderation workflow.</p>
+        </div>
+        <div class="review-card">
+            <div class="review-header">
+                <img src="images/BuildermanPfp.webp" alt="YourUser" loading="lazy">
+                <div><h4>YourUser</h4><span>????</span></div>
+            </div>
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p>This could be your review!</p>
+        </div>
+        <div class="review-card">
+            <div class="review-header">
+                <img src="images/KyoPFP.webp" alt="Kyo" loading="lazy">
+                <div><h4>Kyo</h4><span>Variable Founder</span></div>
+            </div>
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p>Professional, clean, and reliable moderation system.</p>
+        </div>
+    </div>
+</section>
+
+<footer>© 2026 Variable Studios. All rights reserved.</footer>
+
+<script>
+/* THEME TOGGLE */
+const toggle=document.getElementById("toggle");
+const icon=toggle.querySelector("i");
+function setTheme(mode){
+    document.body.classList.toggle("light",mode==="light");
+    icon.className = mode==="light" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    localStorage.setItem("theme",mode);
+}
+toggle.addEventListener("click",()=>{setTheme(document.body.classList.contains("light")?"dark":"light");});
+const saved=localStorage.getItem("theme");
+if(saved){setTheme(saved);}
+else if(window.matchMedia('(prefers-color-scheme: light)').matches){setTheme("light");}
+
+/* PREVIEW CARDS SIZING */
+function resizePreviewCards() {
+    const slider = document.querySelector(".preview-slider");
+    const cards = slider.querySelectorAll(".preview-card");
+    const containerWidth = slider.offsetWidth;
+    const cardWidth = (containerWidth - 15) / 2;
+    cards.forEach(card => { card.style.flex = `0 0 ${cardWidth}px`; });
+}
+window.addEventListener("resize", resizePreviewCards);
+window.addEventListener("load", resizePreviewCards);
+
+/* SLIDER ARROWS */
+const slider=document.querySelector(".preview-slider");
+document.querySelector(".arrow-left").addEventListener("click",()=>{slider.scrollBy({left:-slider.offsetWidth/2,behavior:'smooth'});});
+document.querySelector(".arrow-right").addEventListener("click",()=>{slider.scrollBy({left:slider.offsetWidth/2,behavior:'smooth'});});
+
+/* PARTICLES */
+const canvas=document.getElementById("particles-bg");
+const ctx=canvas.getContext("2d");
+let particles=[];
+const count=80;
+
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+resize();addEventListener("resize",resize);
+
+class Particle{
+constructor(){
+this.x=Math.random()*canvas.width;
+this.y=Math.random()*canvas.height;
+this.r=Math.random()*2+1;
+this.dx=(Math.random()-0.5)*0.5;
+this.dy=(Math.random()-0.5)*0.5;
+}
+draw(){
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+ctx.fillStyle=document.body.classList.contains("light")?"rgba(0,0,0,0.4)":"rgba(255,255,255,0.6)";
+ctx.fill();
+}
+update(){
+this.x+=this.dx;
+this.y+=this.dy;
+if(this.x<0||this.x>canvas.width)this.dx*=-1;
+if(this.y<0||this.y>canvas.height)this.dy*=-1;
+this.draw();
+}
+}
+
+function init(){particles=[];for(let i=0;i<count;i++)particles.push(new Particle());}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>p.update());requestAnimationFrame(animate);}
+init();animate();
+
+/* NOTICE TOGGLE */
+const showNotice = true; // change to false to hide
+const notice = document.getElementById("notice-banner");
+const closeBtn = document.getElementById("notice-close");
+
+if(showNotice){
+    notice.style.display = "flex";
+}
+closeBtn.addEventListener("click", ()=>{
+    notice.style.display = "none";
+});
+</script>
+
+</body>
+</html>
